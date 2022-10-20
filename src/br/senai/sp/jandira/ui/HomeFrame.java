@@ -5,7 +5,7 @@ import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 public class HomeFrame extends javax.swing.JFrame {
 
     private PlanosDeSaudePanel planosDeSaudePanel;
-    
+    private EspecialidadePanel especialidadePanel;
     private final int POSICAO_X = 10;
     private final int POSICAO_Y = 180;
     private final int LARGURA = 945;
@@ -193,7 +193,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed
         panelHome.setVisible(false);
-        planosDeSaudePanel.setVisible(true);
+        especialidadePanel.setVisible(true);
         
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
 

@@ -55,7 +55,7 @@ public class EspecialidadeDao {
         
     }
     
-    public static DefaultTableModel tableEspecialidadeModel() {
+    public static DefaultTableModel getTableModel() {
         
         Object[][] dadosEspecialidades = new Object[especialidades.size()][3];
         
