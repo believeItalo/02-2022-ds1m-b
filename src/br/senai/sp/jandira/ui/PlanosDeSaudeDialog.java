@@ -6,26 +6,26 @@ import br.senai.sp.jandira.model.TipoOperacao;
 import javax.swing.JOptionPane;
 
 public class PlanosDeSaudeDialog extends javax.swing.JDialog {
-    
+
     private TipoOperacao tipoOperacao;
     private PlanoDeSaude planoDeSaude;
 
     public PlanosDeSaudeDialog(
-            java.awt.Frame parent, 
-            boolean modal, 
+            java.awt.Frame parent,
+            boolean modal,
             TipoOperacao tipoOperacao,
             PlanoDeSaude planoDeSaude) {
-        
+
         super(parent, modal);
         initComponents();
         this.tipoOperacao = tipoOperacao;
         this.planoDeSaude = planoDeSaude;
-        
+
         // Preencher os campos, caso o tipo de operação for ALTERAR
-        if(tipoOperacao == TipoOperacao.ALTERAR) {
+        if (tipoOperacao == TipoOperacao.ALTERAR) {
             preencherFormulario();
         }
-        
+
     }
 
     private void preencherFormulario() {
@@ -35,7 +35,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         textNomeDaOperadora.setText(planoDeSaude.getOperadora());
         textTipoDoPlano.setText(planoDeSaude.getTipoDoPlano());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -122,8 +122,8 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textTipoDoPlanoActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        
-        if(tipoOperacao == TipoOperacao.ADICIONAR) {
+
+        if (tipoOperacao == TipoOperacao.ADICIONAR) {
             gravar();
         } else {
             atualizar();
@@ -132,69 +132,76 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void atualizar() {
+        
         planoDeSaude.setOperadora(textNomeDaOperadora.getText());
         planoDeSaude.setTipoDoPlano(textTipoDoPlano.getText());
-        PlanoDeSaudeDAO.atualizar(planoDeSaude);
-        JOptionPane.showMessageDialog(
-                null, 
-                "Plano de saúde atualizado com sucesso!",
-                "Plano de Saúde",
-                JOptionPane.INFORMATION_MESSAGE);
-        dispose();
         
+        if(validarCadastro()) {
+            PlanoDeSaudeDAO.atualizar(planoDeSaude);
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Plano de saúde atualizado com sucesso!",
+                    "Plano de Saúde",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            dispose();
+        }
+        
+
     }
-    
+
     private void gravar() {
         // Criar um objeto Plano de Saúde
         PlanoDeSaude planoDeSaude = new PlanoDeSaude();
         planoDeSaude.setOperadora(textNomeDaOperadora.getText());
         planoDeSaude.setTipoDoPlano(textTipoDoPlano.getText());
-        
-        if (validarCadastro()){
+
+        if (validarCadastro()) {
             PlanoDeSaudeDAO.gravar(planoDeSaude);
-            
+
             JOptionPane.showMessageDialog(
-                    this, 
-                    "Plano de saúde gravado com sucesso!", 
-                    "Plano de Saúde", 
+                    this,
+                    "Plano de saúde gravado com sucesso!",
+                    "Plano de Saúde",
                     JOptionPane.INFORMATION_MESSAGE);
-            
+
             dispose();
         }
     }
-    
+
     private boolean validarCadastro() {
-        
-        if (textNomeDaOperadora.getText().isEmpty()){
-            
+
+        if (textNomeDaOperadora.getText().isEmpty()) {
+
             JOptionPane.showMessageDialog(
-                    this, 
-                    "Por favor preencha o nome da operadora!", 
-                    "Plano de Saúde", 
+                    this,
+                    "Por favor preencha o nome da operadora!",
+                    "Plano de Saúde",
                     JOptionPane.ERROR_MESSAGE);
-            
+
             textNomeDaOperadora.requestFocus();
-            
+
             return false;
-            
+
         }
-        
+
         if (textTipoDoPlano.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(
-                    this, 
-                    "Por favor preencha o tipo do plano!", 
-                    "Plano de Saúde", 
+                    this,
+                    "Por favor preencha o tipo do plano!",
+                    "Plano de Saúde",
                     JOptionPane.ERROR_MESSAGE);
-            
+
             textTipoDoPlano.requestFocus();
-            
+
             return false;
-            
+
         }
-        
+
         return true;
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
