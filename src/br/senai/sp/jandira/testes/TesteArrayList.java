@@ -49,44 +49,7 @@ public class TesteArrayList {
 		// Criar 3 especialidades, guardar as especialidades em um arraylist
 		// e exibir o nome das especialides usando for each
 		
-		Especialidade e1 = new Especialidade();
-		e1.setNome("Cardiologia");
-		e1.setDescricao("Cuida do coração.");
 		
-		Especialidade e2 = new Especialidade();
-		e2.setNome("Otorrino");
-		e2.setDescricao("Cuida do ouvido.");
-		
-		Especialidade e3 = new Especialidade();
-		e3.setNome("Fisioterapia");
-		e3.setDescricao("Cuida dos ossos e músculos.");
-		
-		Especialidade teste = new Especialidade();
-		
-		e1.getQuantidade();
-		
-		ArrayList<Especialidade> especialidades = new ArrayList<>();
-		especialidades.add(e1);
-		especialidades.add(e2);
-		especialidades.add(e3);
-		
-		for(Especialidade e : especialidades) {
-			System.out.printf("%s --> %s\n", e.getNome(), e.getDescricao());
-		}
-		
-		System.out.println(e1.getQuantidade());
-		System.out.println(e2.getQuantidade());
-		System.out.println(e3.getQuantidade());
-		
-		
-		System.out.println(e1.getQuantidade());
-		System.out.println(e2.getQuantidade());
-		System.out.println(e3.getQuantidade());
-		
-		
-		System.out.println(e1.getQuantidade());
-		System.out.println(e2.getQuantidade());
-		System.out.println(e3.getQuantidade());
 		
 	}
 
