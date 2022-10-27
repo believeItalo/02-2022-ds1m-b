@@ -66,7 +66,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         labelTitulo.setBounds(10, 10, 530, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 810, 50);
+        jPanel1.setBounds(0, 0, 580, 50);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalhes do plano de saúde:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(153, 0, 51))); // NOI18N
         jPanel2.setLayout(null);
@@ -82,6 +82,12 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         jLabel3.setText("Nome da operadora:");
         jPanel2.add(jLabel3);
         jLabel3.setBounds(30, 110, 230, 16);
+
+        textNomeDaOperadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textNomeDaOperadoraActionPerformed(evt);
+            }
+        });
         jPanel2.add(textNomeDaOperadora);
         textNomeDaOperadora.setBounds(30, 130, 500, 30);
 
@@ -114,7 +120,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(10, 60, 560, 340);
 
-        setBounds(0, 0, 602, 459);
+        setBounds(0, 0, 598, 508);
     }// </editor-fold>//GEN-END:initComponents
 
     private void textTipoDoPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTipoDoPlanoActionPerformed
@@ -130,6 +136,10 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_buttonSalvarActionPerformed
+
+    private void textNomeDaOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeDaOperadoraActionPerformed
+      
+    }//GEN-LAST:event_textNomeDaOperadoraActionPerformed
 
     private void atualizar() {
         

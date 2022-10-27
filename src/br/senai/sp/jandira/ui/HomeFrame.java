@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.EspecialidadeDao;
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 
 public class HomeFrame extends javax.swing.JFrame {
@@ -15,6 +16,7 @@ public class HomeFrame extends javax.swing.JFrame {
         
         initComponents();
         PlanoDeSaudeDAO.criarPlanosDeSaudeTeste();
+        EspecialidadeDao.criarEspecialidadesTeste();
         initPanels();
         
     }
@@ -67,6 +69,11 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonSair.setForeground(new java.awt.Color(51, 0, 255));
         buttonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/exit32.png"))); // NOI18N
         buttonSair.setToolTipText("Sair do sistema");
+        buttonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSairActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonSair);
         buttonSair.setBounds(875, 100, 80, 60);
 
@@ -179,6 +186,7 @@ public class HomeFrame extends javax.swing.JFrame {
         
         buttonPlanosDeSaude.setBackground(new java.awt.Color(153, 0, 153));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
+        buttonEspecialidades.setBackground((new java.awt.Color(246, 246, 246)));
         panelHome.setVisible(false);
         planosDeSaudePanel.setVisible(true);
         
@@ -187,15 +195,23 @@ public class HomeFrame extends javax.swing.JFrame {
     private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
         buttonPlanosDeSaude.setBackground(new java.awt.Color(246, 246, 246));
         buttonHome.setBackground(new java.awt.Color(153, 0, 153));
+        buttonEspecialidades.setBackground((new java.awt.Color(246, 246, 246)));
         panelHome.setVisible(true);
         planosDeSaudePanel.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed
+        buttonPlanosDeSaude.setBackground(new java.awt.Color(246, 246, 246));
+        buttonEspecialidades.setBackground(new java.awt.Color(153, 0, 153));
+        buttonHome.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
+        planosDeSaudePanel.setVisible(false);
         especialidadePanel.setVisible(true);
-        
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
+
+    private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_buttonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgenda;
@@ -229,7 +245,13 @@ public class HomeFrame extends javax.swing.JFrame {
         getContentPane().add(planosDeSaudePanel);
         planosDeSaudePanel.setVisible(false);
         
+        especialidadePanel = new EspecialidadePanel();
+        especialidadePanel.setBounds(
+                POSICAO_X, POSICAO_Y,
+                LARGURA, ALTURA);
 
+        getContentPane().add(especialidadePanel);
+        especialidadePanel.setVisible(false);
     }
 
 }

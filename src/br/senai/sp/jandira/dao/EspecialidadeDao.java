@@ -2,6 +2,7 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Especialidade;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,6 @@ public class EspecialidadeDao {
         for(Especialidade e : especialidades) {
             if (e.getCodigo() == codigo) {
                 especialidades.remove(e);
-                System.out.println("Excluindo especialidade...");
                 break;
             }
         }
@@ -34,7 +34,7 @@ public class EspecialidadeDao {
         Especialidade especialidade = new Especialidade();
         
         for(Especialidade e : especialidades) {
-            if (e.getCodigo() == codigo) {
+            if (e.getCodigo().equals(codigo)) {
                 return e;
             }
         }
@@ -43,25 +43,42 @@ public class EspecialidadeDao {
         
     }
     
-    public static void atualizar(Especialidade especialidadeAtualizada) {
+    public static void atualizar(Especialidade especialidade) {
         
-        for(Especialidade e : especialidades) {
-            if(Objects.equals(e.getCodigo(), especialidadeAtualizada.getCodigo())) {
-                int i = especialidades.indexOf(e);
-                especialidades.set(i, especialidadeAtualizada);
+               for(Especialidade e : especialidades) {
+            if(e.getCodigo().equals(especialidade.getCodigo())){
+                especialidades.set(especialidades.indexOf(e), especialidade);
                 break;
             }
         }
         
     }
     
+       public static void criarEspecialidadesTeste() {
+        Especialidade e1 = new Especialidade("Cardiologista", "Cuida do Coração");
+        Especialidade e2 = new Especialidade("TEste", "teste");
+        Especialidade e3 = new Especialidade("Pediatria", "cuida das crianças");
+        Especialidade e4 = new Especialidade("Cardiologista", "Cuida do Coração");
+        Especialidade e5 = new Especialidade("TEste", "teste");
+        Especialidade e6 = new Especialidade("", "");
+        especialidades.add(e1);
+        especialidades.add(e2);
+        especialidades.add(e3);
+        especialidades.add(e4);
+        especialidades.add(e5);
+        especialidades.add(e6);
+        
+        
+    }
+
+    
     public static DefaultTableModel getTableModel() {
         
         Object[][] dadosEspecialidades = new Object[especialidades.size()][3];
         
         int linha = 0;
-        for(Especialidade e : especialidades) {
-            dadosEspecialidades[linha][0] = e.getCodigo().toString();
+        for(Especialidade e : especialidades){
+            dadosEspecialidades[linha][0] = e.getCodigo();
             dadosEspecialidades[linha][1] = e.getNome();
             dadosEspecialidades[linha][2] = e.getDescricao();
             linha++;
