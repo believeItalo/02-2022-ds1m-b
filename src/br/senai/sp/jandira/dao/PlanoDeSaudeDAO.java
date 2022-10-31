@@ -1,14 +1,21 @@
 package br.senai.sp.jandira.dao;
 
 import java.util.ArrayList;
-
 import br.senai.sp.jandira.model.PlanoDeSaude;
+import java.io.BufferedWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class PlanoDeSaudeDAO { // Simular nosso banco de dados
 
     private PlanoDeSaude planoDeSaude;
     private static ArrayList<PlanoDeSaude> planos = new ArrayList<>();
+    private static final String ARQUIVO = "C:\\Users\\22282094\\java\\planoDeSaude.txt"; 
+    private static final Path PATH = Paths.get(ARQUIVO);
 
     public PlanoDeSaudeDAO(PlanoDeSaude planoDeSaude) {
         this.planos.add(planoDeSaude);
@@ -20,6 +27,25 @@ public class PlanoDeSaudeDAO { // Simular nosso banco de dados
 
     public static void gravar(PlanoDeSaude planoDeSaude) {
         planos.add(planoDeSaude);
+        
+        try {
+            BufferedWriter bw = Files.newBufferedWriter(PATH,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+                    
+                    bw.write(planoDeSaude.getPlanoDeSaudeSeparadoPorPontoEVirgula());
+                    bw.newLine();
+                    bw.close();
+            
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(
+                     null, 
+                    "O Arquivo não existe",
+                    "Buffer",
+                    2); 
+        }
+      
+        
     }
     
     public static boolean excluir(Integer codigo) {

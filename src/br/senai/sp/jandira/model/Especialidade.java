@@ -60,4 +60,10 @@ public class Especialidade {
         
         }
 
+        public String getEspecialidadeSeparadaPorPontoEVirgula(){
+      
+      return this.codigo + ";" + this.nome + ";" + this.descricao;
+      
+      
+      }
 }
