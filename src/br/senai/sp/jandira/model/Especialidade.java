@@ -15,6 +15,14 @@ public class Especialidade {
             atualizarCodigo();
         }
         
+        public Especialidade(Integer codigo, String nome, String descricao){
+        this.codigo = codigo;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.contador = codigo;
+        
+        }
+        
         public Especialidade(String nome, String descricao) {
             this.nome = nome;
             this.descricao = descricao;
@@ -27,8 +35,9 @@ public class Especialidade {
         }
 
         private void atualizarCodigo() {
+                contador++;
 		this.codigo = contador;
-		contador++;
+
 	}
 // Métodos de acesso aos atributos
         public void setNome(String nome) {

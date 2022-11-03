@@ -22,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
 public class EspecialidadeDao {
 private static ArrayList<Especialidade> especialidades = new ArrayList<>();
 private static final String ARQUIVO = "C:\\Users\\22282094\\java\\especialidade.txt";
+private static final String ARQUIVO__TEMP = "C:\\Users\\22282094\\java\\especialidade__TEMP.txt";
 private static final Path PATH = Paths.get(ARQUIVO);
+private static final Path PATH__TEMP = Paths.get(ARQUIVO__TEMP);
     
     public static void gravar(Especialidade especialidade) {
         
@@ -58,6 +60,11 @@ private static final Path PATH = Paths.get(ARQUIVO);
                 break;
             }
         }
+        //reconstruir um arquivo atualizado, ou seja, sem o plano que foi excluído
+        //utilizaremos a classe File
+        
+        //Passo 1: criar representação dos arquivos que serão manipulados
+        
         
     }
     
@@ -89,13 +96,28 @@ private static final Path PATH = Paths.get(ARQUIVO);
         
     }
     
-       public static void criarEspecialidadesTeste() {
-        Especialidade e1 = new Especialidade("Cardiologista", "Cuida do Coração");
-        Especialidade e2 = new Especialidade("Acupuntura", "A Acupuntura é recomendada para o tratamento de 200 doenças e sintomas.");
-        Especialidade e3 = new Especialidade("Pediatria", "Cuida da saúde de bebês, crianças e adolescentes");
-        especialidades.add(e1);
-        especialidades.add(e2);
-        especialidades.add(e3);
+       public static void getTabelaEspecialidades() {
+    
+        try {
+            BufferedReader br = Files.newBufferedReader(PATH);
+            String linha = br.readLine();
+                while(linha != null && !linha.isEmpty()){
+                    String linhaVetor[] = linha.split(";");
+                    Especialidade especialidade = new Especialidade(
+                            Integer.valueOf(linhaVetor[0]),
+                            linhaVetor[1],
+                            linhaVetor[2]);
+                   especialidades.add(especialidade);
+                    linha = br.readLine();
+                    br.close();
+                
+                
+                };
+    } catch (IOException ex) {
+           
+   
+    
+    }
         
         
         
