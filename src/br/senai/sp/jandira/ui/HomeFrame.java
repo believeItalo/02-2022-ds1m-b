@@ -1,12 +1,14 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDao;
+import br.senai.sp.jandira.dao.MedicosDao;
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 
 public class HomeFrame extends javax.swing.JFrame {
 
     private PlanosDeSaudePanel planosDeSaudePanel;
     private EspecialidadePanel especialidadePanel;
+    private MedicosPanel medicoPanel;
     private final int POSICAO_X = 10;
     private final int POSICAO_Y = 180;
     private final int LARGURA = 945;
@@ -17,6 +19,7 @@ public class HomeFrame extends javax.swing.JFrame {
         initComponents();
         PlanoDeSaudeDAO.getListaPlanosDeSaude();
         EspecialidadeDao.getTabelaEspecialidades();
+        MedicosDao.getTableMEdicos();
         initPanels();
         
     }
@@ -119,6 +122,11 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonMedicos.setForeground(new java.awt.Color(51, 0, 255));
         buttonMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/doctor32.png"))); // NOI18N
         buttonMedicos.setToolTipText("Médicos");
+        buttonMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMedicosActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonMedicos);
         buttonMedicos.setBounds(280, 100, 80, 60);
 
@@ -187,6 +195,7 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonPlanosDeSaude.setBackground(new java.awt.Color(153, 0, 153));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
         buttonEspecialidades.setBackground((new java.awt.Color(246, 246, 246)));
+        buttonMedicos.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
         planosDeSaudePanel.setVisible(true);
         
@@ -196,6 +205,8 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonPlanosDeSaude.setBackground(new java.awt.Color(246, 246, 246));
         buttonHome.setBackground(new java.awt.Color(153, 0, 153));
         buttonEspecialidades.setBackground((new java.awt.Color(246, 246, 246)));
+        buttonMedicos.setBackground(new java.awt.Color(246, 246, 246));
+
         panelHome.setVisible(true);
         planosDeSaudePanel.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
@@ -204,6 +215,7 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonPlanosDeSaude.setBackground(new java.awt.Color(246, 246, 246));
         buttonEspecialidades.setBackground(new java.awt.Color(153, 0, 153));
         buttonHome.setBackground(new java.awt.Color(246, 246, 246));
+        buttonMedicos.setBackground(new java.awt.Color(246, 246, 246));
         panelHome.setVisible(false);
         planosDeSaudePanel.setVisible(false);
         especialidadePanel.setVisible(true);
@@ -212,6 +224,18 @@ public class HomeFrame extends javax.swing.JFrame {
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
         dispose();
     }//GEN-LAST:event_buttonSairActionPerformed
+
+    private void buttonMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicosActionPerformed
+        panelHome.setVisible(false);
+        planosDeSaudePanel.setVisible(false);
+        especialidadePanel.setVisible(false);
+        buttonHome.setBackground(new java.awt.Color(246, 246, 246));
+        buttonMedicos.setBackground(new java.awt.Color(153, 0, 153));
+        buttonEspecialidades.setBackground(new java.awt.Color(246, 246, 246));
+        buttonPlanosDeSaude.setBackground(new java.awt.Color(246, 246, 246));
+        medicoPanel.setVisible(true);
+        
+    }//GEN-LAST:event_buttonMedicosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgenda;
@@ -252,6 +276,12 @@ public class HomeFrame extends javax.swing.JFrame {
 
         getContentPane().add(especialidadePanel);
         especialidadePanel.setVisible(false);
+        
+        medicoPanel = new MedicosPanel();
+        medicoPanel.setBounds(POSICAO_X, POSICAO_Y, LARGURA, ALTURA);
+        getContentPane().add(medicoPanel);
+        medicoPanel.setVisible(false);
+        
     }
 
 }

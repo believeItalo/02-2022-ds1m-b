@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import br.senai.sp.jandira.model.TipoOperacao;
 import javax.swing.JOptionPane;
@@ -8,18 +9,18 @@ import javax.swing.JOptionPane;
 public class MedicosDialog extends javax.swing.JDialog {
 
     private TipoOperacao tipoOperacao;
-    private PlanoDeSaude planoDeSaude;
+    private Medico medico;
 
     public MedicosDialog(
             java.awt.Frame parent,
             boolean modal,
             TipoOperacao tipoOperacao,
-            PlanoDeSaude planoDeSaude) {
+           Medico medico) {
 
         super(parent, modal);
         initComponents();
         this.tipoOperacao = tipoOperacao;
-        this.planoDeSaude = planoDeSaude;
+        this.medico = medico;
 
         // Preencher os campos, caso o tipo de operação for ALTERAR
         if (tipoOperacao == TipoOperacao.ALTERAR) {
@@ -29,11 +30,15 @@ public class MedicosDialog extends javax.swing.JDialog {
     }
 
     private void preencherFormulario() {
-        labelTituloMedicos.setText("Planos de Saúde - " + tipoOperacao);
-        labelTituloMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/edit32.png")));
-        textFieldCodigoMedicos.setText(planoDeSaude.getCodigo().toString());
-        textFieldTelefoneMedico.setText(planoDeSaude.getOperadora());
-        textfieldDataDeNascimentoDoMedico.setText(planoDeSaude.getTipoDoPlano());
+        
+        labelTituloMedicos.setText("Medicos - " + tipoOperacao);
+        textFieldCodigoMedicos.setText(medico.getCodigo().toString());
+        textFieldCrm1.setText(medico.getCrm());
+        textfieldNomeDoMedico1.setText(medico.getNome());
+        
+
+ 
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -88,6 +93,11 @@ public class MedicosDialog extends javax.swing.JDialog {
         labelCodigoMedicos.setBounds(40, 50, 70, 16);
 
         textFieldCodigoMedicos.setEditable(false);
+        textFieldCodigoMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldCodigoMedicosActionPerformed(evt);
+            }
+        });
         jPanel2.add(textFieldCodigoMedicos);
         textFieldCodigoMedicos.setBounds(40, 70, 90, 30);
 
@@ -209,12 +219,12 @@ public class MedicosDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textfieldDataDeNascimentoDoMedicoActionPerformed
 
     private void buttonSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarMedicoActionPerformed
-
-        if (tipoOperacao == TipoOperacao.ADICIONAR) {
-            gravar();
-        } else {
-            atualizar();
-        }
+//
+//        if (tipoOperacao == TipoOperacao.ADICIONAR) {
+//            gravar();
+//        } else {
+//            atualizar();
+//        }
 
     }//GEN-LAST:event_buttonSalvarMedicoActionPerformed
 
@@ -238,78 +248,16 @@ public class MedicosDialog extends javax.swing.JDialog {
       dispose();
     }//GEN-LAST:event_buttonCancelarMedicoActionPerformed
 
-    private void atualizar() {
-        
-        planoDeSaude.setOperadora(textFieldTelefoneMedico.getText());
-        planoDeSaude.setTipoDoPlano(textfieldDataDeNascimentoDoMedico.getText());
-        
-        if(validarCadastro()) {
-            PlanoDeSaudeDAO.atualizar(planoDeSaude);
+    private void textFieldCodigoMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCodigoMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldCodigoMedicosActionPerformed
 
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Plano de saúde atualizado com sucesso!",
-                    "Plano de Saúde",
-                    JOptionPane.INFORMATION_MESSAGE);
 
-            dispose();
-        }
-        
+   
 
-    }
+   
 
-    private void gravar() {
-        // Criar um objeto Plano de Saúde
-        PlanoDeSaude planoDeSaude = new PlanoDeSaude();
-        planoDeSaude.setOperadora(textFieldTelefoneMedico.getText());
-        planoDeSaude.setTipoDoPlano(textfieldDataDeNascimentoDoMedico.getText());
-
-        if (validarCadastro()) {
-            PlanoDeSaudeDAO.gravar(planoDeSaude);
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Plano de saúde gravado com sucesso!",
-                    "Plano de Saúde",
-                    JOptionPane.INFORMATION_MESSAGE);
-
-            dispose();
-        }
-    }
-
-    private boolean validarCadastro() {
-
-        if (textFieldTelefoneMedico.getText().isEmpty()) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Por favor preencha o nome da operadora!",
-                    "Plano de Saúde",
-                    JOptionPane.ERROR_MESSAGE);
-
-            textFieldTelefoneMedico.requestFocus();
-
-            return false;
-
-        }
-
-        if (textfieldDataDeNascimentoDoMedico.getText().isEmpty()) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Por favor preencha o tipo do plano!",
-                    "Plano de Saúde",
-                    JOptionPane.ERROR_MESSAGE);
-
-            textfieldDataDeNascimentoDoMedico.requestFocus();
-
-            return false;
-
-        }
-
-        return true;
-
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> JlistListaDeEspecialidades;

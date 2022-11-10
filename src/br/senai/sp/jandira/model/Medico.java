@@ -4,10 +4,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Medico extends Pessoa {
-
+    private static int contador = 100;
+    private Integer codigo;
     private String crm;
-    private ArrayList<Especialidade> especialidades;
+    private Especialidade especialidades;
+    
+    
+    public Medico(){
+     
+        atualizarCodigo();
+        
+        
+    }
+    
+    
+    public Medico(String crm, String nome){
+        this.crm = crm;
+        atualizarCodigo();
+    }
 
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    
+    
     public String getCrm() {
         return crm;
     }
@@ -16,12 +37,23 @@ public class Medico extends Pessoa {
         this.crm = crm;
     }
 
-    public void setEspecialidades(ArrayList<Especialidade> especialidades) {
-        this.especialidades = especialidades;
-    }
+ 
 
-    public ArrayList<Especialidade> getEspecialidades() {
+    public Especialidade getEspecialidades() {
         return especialidades;
     }
 
-}
+    private void atualizarCodigo() {
+        contador++;
+        this.codigo = contador;
+    }
+
+    public String getMedicosSeparadosPorPontoEVirgula(){
+     String MedicosStr = 
+             this.codigo + ";"
+             + this.getNome() + ";" +
+             this.getCrm() + ";" + this.especialidades;
+        return MedicosStr;
+    
+   
+}}
