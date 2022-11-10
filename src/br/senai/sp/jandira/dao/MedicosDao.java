@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Medico;
+import br.senai.sp.jandira.model.Pessoa;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 public class MedicosDao {

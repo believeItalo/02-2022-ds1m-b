@@ -20,26 +20,26 @@ public class MedicosDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.tipoOperacao = tipoOperacao;
-        this.medico = medico;
+        
 
         // Preencher os campos, caso o tipo de operação for ALTERAR
-        if (tipoOperacao == TipoOperacao.ALTERAR) {
-            preencherFormulario();
-        }
+//        if (tipoOperacao == TipoOperacao.ALTERAR) {
+////            preencherFormulario();
+//        }
 
     }
 
-    private void preencherFormulario() {
-        
-        labelTituloMedicos.setText("Medicos - " + tipoOperacao);
-        textFieldCodigoMedicos.setText(medico.getCodigo().toString());
-        textFieldCrm1.setText(medico.getCrm());
-        textfieldNomeDoMedico1.setText(medico.getNome());
-        
-
- 
-       
-    }
+//    private void preencherFormulario() {
+//        
+//        labelTituloMedicos.setText("Medicos - " + tipoOperacao);
+//        textFieldCodigoMedicos.setText(medico.getCodigo().toString());
+//        textFieldCrm1.setText(medico.getCrm());
+//        textfieldNomeDoMedico1.setText(medico.getNome());
+//        
+//
+// 
+//       
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
