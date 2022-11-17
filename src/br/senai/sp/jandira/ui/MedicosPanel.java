@@ -2,11 +2,13 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.MedicosDao;
+import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.TipoOperacao;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class MedicosPanel extends javax.swing.JPanel {
-
+    int linha;
    
     public MedicosPanel() {
         initComponents();
@@ -91,37 +93,37 @@ public class MedicosPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirMedicosActionPerformed
-
-////        // Obtemos o índice da linha selecionada na tabela
-////        linha = tablePlanosDeSaude.getSelectedRow();
-////
-////        // Verificamos se a linha é diferente de -1
-////        // -1 significa que o usuário não selecionou nada
-////        if (linha != -1) {
-////            excluir();
-////        } else {
-////            JOptionPane.showMessageDialog(
-////                this,
-////                "Por favor, selecione o plano que você deseja excluir!",
-////                "Plano de Saúde",
-////                JOptionPane.ERROR_MESSAGE);
-////        }
+        linha = tableMedicos.getSelectedRow();
+        
+         if (linha != -1) {
+            excluir();
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, selecione o Médico que você deseja excluir!",
+                    "Médico",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_buttonExcluirMedicosActionPerformed
 
     private void buttonAlterarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarMedicosActionPerformed
-
-//        linha = tablePlanosDeSaude.getSelectedRow();
-//
-//        if (linha != -1) {
-//            editar();
-//        } else {
-//            JOptionPane.showMessageDialog(
-//                this,
-//                "Por favor, selecione um plano de saúde para alterar.",
-//                "Planos de Saúde",
-//                JOptionPane.WARNING_MESSAGE);
-//        }
-//
+          linha = tableMedicos.getSelectedRow();
+          
+          if (linha != -1) {
+            editar();
+        }
+          else{
+              JOptionPane.showMessageDialog(this, 
+                      "Por Favor, selecione um Médico para alterar",
+                      "Médicos", 
+                      JOptionPane.WARNING_MESSAGE);
+          
+          
+          }
+        
+        
+      
     }//GEN-LAST:event_buttonAlterarMedicosActionPerformed
 
     private void buttonAdicionarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarMedicosActionPerformed
@@ -168,5 +170,47 @@ public class MedicosPanel extends javax.swing.JPanel {
         tableMedicos.setDefaultEditor(Object.class, null);
 //          
     }
+
+    private void excluir() {
+        int resposta = JOptionPane.showConfirmDialog(
+                this,
+                "Você confirma a exclusão do Médico selecionado?",
+                "Médico",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        
+        if(resposta == 0) {
+            MedicosDao.excluir(getCodigo());
+            criarTabelaMedicos();
+            
+            
+            
+//         PlanoDeSaudeDAO.excluir(getCodigo());
+//            criarTabelaPlanosDeSaude();
+        }
+        
+     
     }
+
+    private Integer getCodigo() {
+        String codigoStr = tableMedicos.getValueAt(linha, 0).toString();
+        return Integer.valueOf(codigoStr);
+    }
+
+    private void editar() {
+
+        Medico medico = MedicosDao.getMedicos(getCodigo());
+
+
+        MedicosDialog medicoDialog =
+                new MedicosDialog(null,
+                        true, 
+                        TipoOperacao.ALTERAR,
+                        medico);
+        medicoDialog.setVisible(true);
+        criarTabelaMedicos();
+    }
+}
+    
 

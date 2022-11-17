@@ -172,7 +172,7 @@ public class PlanosDeSaudeDialog extends javax.swing.JDialog {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Plano de saúde gravado com sucesso!",
+                    "Plano de saúde atualizado com sucesso!",
                     "Plano de Saúde",
                     JOptionPane.INFORMATION_MESSAGE);
 

@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.MedicosDao;
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.PlanoDeSaude;
@@ -20,26 +21,38 @@ public class MedicosDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.tipoOperacao = tipoOperacao;
+        this.medico = medico;
         
 
-        // Preencher os campos, caso o tipo de operação for ALTERAR
-//        if (tipoOperacao == TipoOperacao.ALTERAR) {
-////            preencherFormulario();
-//        }
+       //  Preencher os campos, caso o tipo de operação for ALTERAR
+        if (tipoOperacao == TipoOperacao.ALTERAR) {
+            preencherFormulario();
+        }
 
     }
 
-//    private void preencherFormulario() {
-//        
-//        labelTituloMedicos.setText("Medicos - " + tipoOperacao);
-//        textFieldCodigoMedicos.setText(medico.getCodigo().toString());
-//        textFieldCrm1.setText(medico.getCrm());
-//        textfieldNomeDoMedico1.setText(medico.getNome());
-//        
-//
-// 
-//       
-//    }
+    private void preencherFormulario() {
+        
+       labelTituloMedicos.setText("Médicos - " + tipoOperacao);
+       textFieldCrm1.setText(medico.getCrm());
+       textfieldNomeDoMedico1.setText(medico.getNome());
+       textFieldCodigoMedicos.setText(medico.getCodigo().toString());
+       textfieldEmailDoMedico1.setText(medico.getEmail());
+      
+       
+       
+       
+       
+       
+//       textCodigo.setText(planoDeSaude.getCodigo().toString());
+//        textNomeDaOperadora.setText(planoDeSaude.getOperadora());
+//        textTipoDoPlano.setText(planoDeSaude.getTipoDoPlano());
+        
+
+ 
+       
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -150,7 +163,7 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(textFieldCrm1);
-        textFieldCrm1.setBounds(140, 70, 90, 30);
+        textFieldCrm1.setBounds(140, 70, 60, 30);
 
         labelDataDeNascimentoDoMedico.setText("Data De Nascimento:");
         jPanel2.add(labelDataDeNascimentoDoMedico);
@@ -162,7 +175,7 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(textfieldNomeDoMedico1);
-        textfieldNomeDoMedico1.setBounds(250, 70, 300, 30);
+        textfieldNomeDoMedico1.setBounds(250, 70, 280, 30);
 
         labelNomeDoMedico2.setText("Nome do Médico:");
         jPanel2.add(labelNomeDoMedico2);
@@ -219,12 +232,12 @@ public class MedicosDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textfieldDataDeNascimentoDoMedicoActionPerformed
 
     private void buttonSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarMedicoActionPerformed
-//
-//        if (tipoOperacao == TipoOperacao.ADICIONAR) {
-//            gravar();
-//        } else {
-//            atualizar();
-//        }
+
+        if (tipoOperacao == TipoOperacao.ADICIONAR) {
+            gravar();
+        } else {
+            atualizar();
+        }
 
     }//GEN-LAST:event_buttonSalvarMedicoActionPerformed
 
@@ -284,4 +297,63 @@ public class MedicosDialog extends javax.swing.JDialog {
     private javax.swing.JTextField textfieldEmailDoMedico1;
     private javax.swing.JTextField textfieldNomeDoMedico1;
     // End of variables declaration//GEN-END:variables
-}
+
+    private void gravar() {
+        
+        Medico m = new Medico();
+        m.setNome(textfieldNomeDoMedico1.getText());
+        m.setCrm(textFieldCrm1.getText());
+        m.setEmail(textfieldEmailDoMedico1.getText());
+        if(validarCadastro()){
+        
+            MedicosDao.gravar(m);
+            JOptionPane.showMessageDialog(this, "Médico gravado com sucesso");
+            dispose();
+        }
+        
+
+    }
+
+    private boolean validarCadastro() {
+        
+            if (textfieldNomeDoMedico1.getText().isEmpty() || textFieldCrm1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Preencha os campos (Nome) e (Crm) ", 
+                    "Médicos", 
+                    JOptionPane.WARNING_MESSAGE); 
+                    return false;
+            }
+            return true;
+        
+        
+    }
+
+    private void atualizar() {
+        medico.setNome(textfieldNomeDoMedico1.getText());
+        medico.setCrm(textFieldCrm1.getText());
+        
+
+        if (validarCadastro()) {
+            MedicosDao.atualizar(medico);
+            JOptionPane.showMessageDialog(this,
+                    "Medico gravado com sucesso",
+                    "Medico",
+                    JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+    }
+//        planoDeSaude.setOperadora(textNomeDaOperadora.getText());
+//        planoDeSaude.setTipoDoPlano(textTipoDoPlano.getText());
+//        
+//        if(validarCadastro()) {
+//            PlanoDeSaudeDAO.atualizar(planoDeSaude);
+//
+//            JOptionPane.showMessageDialog(
+//                    null,
+//                    "Plano de saúde atualizado com sucesso!",
+//                    "Plano de Saúde",
+//                    JOptionPane.INFORMATION_MESSAGE);
+//
+//            dispose();
+//        }
+    }}
+
+
