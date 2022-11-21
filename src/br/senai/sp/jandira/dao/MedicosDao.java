@@ -149,6 +149,8 @@ public class MedicosDao {
                         Integer.valueOf(linhaVetor[0]),
                         linhaVetor[2], 
                         linhaVetor[1]);
+                                      
+                       
                 listaMedicos.add(novoMedico);
                 linha = br.readLine();
                 br.close();

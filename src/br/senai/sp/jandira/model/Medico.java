@@ -13,24 +13,24 @@ public class Medico extends Pessoa {
     public Medico(){
      
         atualizarCodigo();
-        
-        
-    }
-    
-      public Medico(Integer codigo, String crm , String nome){
-              
-            this.codigo = codigo;
-            setNome(nome);
-            this.crm = crm;
-           
-          
-       
-        
-       
         }
     
-    public Medico(String crm, String nome){
+      public Medico(Integer codigo, String crm , String nome, String email, String telefone){
+              
+            this.codigo = contador;
+            this.crm = crm;
+            setNome(nome);
+            setEmail(email);
+            setTelefone(telefone);
+            
+          
+            atualizarCodigo();
+        }
+    
+    public Medico(Integer codigo, String crm, String nome){
         this.crm = crm;
+        this.codigo = contador;
+        setNome(nome);
         atualizarCodigo();
     }
 
@@ -63,8 +63,7 @@ public class Medico extends Pessoa {
      String MedicosStr = 
              this.codigo + ";"
              + this.getNome() + ";" +
-             this.getCrm() + ";" + this.especialidades;
+             this.getCrm() + ";" + this.getEmail()+";"+ this.getTelefone();
+       
         return MedicosStr;
-    
-   
 }}

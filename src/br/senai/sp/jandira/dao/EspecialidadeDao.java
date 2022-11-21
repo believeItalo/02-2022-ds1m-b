@@ -1,6 +1,5 @@
 
 package br.senai.sp.jandira.dao;
-
 import br.senai.sp.jandira.model.Especialidade;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Level;

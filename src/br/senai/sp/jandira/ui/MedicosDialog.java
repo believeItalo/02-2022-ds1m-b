@@ -38,6 +38,7 @@ public class MedicosDialog extends javax.swing.JDialog {
        textfieldNomeDoMedico1.setText(medico.getNome());
        textFieldCodigoMedicos.setText(medico.getCodigo().toString());
        textfieldEmailDoMedico1.setText(medico.getEmail());
+       textFieldTelefoneMedico.setText(medico.getTelefone());
       
        
        
@@ -75,12 +76,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         labelNomeDoMedico2 = new javax.swing.JLabel();
         labelEmailDoMedico1 = new javax.swing.JLabel();
         textfieldEmailDoMedico1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListListaDeMedicos = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        JlistListaDeEspecialidades = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -145,7 +141,7 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(buttonCancelarMedico);
-        buttonCancelarMedico.setBounds(490, 370, 60, 60);
+        buttonCancelarMedico.setBounds(130, 250, 60, 60);
 
         buttonSalvarMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/save32.png"))); // NOI18N
         buttonSalvarMedico.setToolTipText("Salvar Cadastro");
@@ -155,7 +151,7 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(buttonSalvarMedico);
-        buttonSalvarMedico.setBounds(490, 290, 60, 60);
+        buttonSalvarMedico.setBounds(40, 250, 60, 60);
 
         textFieldCrm1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,11 +171,11 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(textfieldNomeDoMedico1);
-        textfieldNomeDoMedico1.setBounds(250, 70, 280, 30);
+        textfieldNomeDoMedico1.setBounds(230, 70, 280, 30);
 
         labelNomeDoMedico2.setText("Nome do Médico:");
         jPanel2.add(labelNomeDoMedico2);
-        labelNomeDoMedico2.setBounds(250, 50, 100, 16);
+        labelNomeDoMedico2.setBounds(230, 50, 100, 16);
 
         labelEmailDoMedico1.setText("Email:");
         jPanel2.add(labelEmailDoMedico1);
@@ -193,33 +189,14 @@ public class MedicosDialog extends javax.swing.JDialog {
         jPanel2.add(textfieldEmailDoMedico1);
         textfieldEmailDoMedico1.setBounds(140, 150, 250, 30);
 
-        jListListaDeMedicos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jButton3.setText("Abrir Lista de Especialidades");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(jListListaDeMedicos);
-
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(280, 230, 160, 210);
-
-        JlistListaDeEspecialidades.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(JlistListaDeEspecialidades);
-
-        jPanel2.add(jScrollPane2);
-        jScrollPane2.setBounds(40, 230, 160, 210);
-
-        jButton1.setText(">");
-        jPanel2.add(jButton1);
-        jButton1.setBounds(220, 260, 40, 23);
-
-        jButton2.setText("<");
-        jPanel2.add(jButton2);
-        jButton2.setBounds(220, 310, 40, 23);
+        jPanel2.add(jButton3);
+        jButton3.setBounds(220, 250, 190, 60);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(10, 60, 560, 500);
@@ -265,6 +242,10 @@ public class MedicosDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldCodigoMedicosActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+      
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
    
 
@@ -273,16 +254,11 @@ public class MedicosDialog extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> JlistListaDeEspecialidades;
     private javax.swing.JButton buttonCancelarMedico;
     private javax.swing.JButton buttonSalvarMedico;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JList<String> jListListaDeMedicos;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelCodigoMedicos;
     private javax.swing.JLabel labelCrmMedico;
     private javax.swing.JLabel labelDataDeNascimentoDoMedico;
@@ -304,6 +280,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         m.setNome(textfieldNomeDoMedico1.getText());
         m.setCrm(textFieldCrm1.getText());
         m.setEmail(textfieldEmailDoMedico1.getText());
+        m.setTelefone(textFieldTelefoneMedico.getText());
         if(validarCadastro()){
         
             MedicosDao.gravar(m);
@@ -330,6 +307,8 @@ public class MedicosDialog extends javax.swing.JDialog {
     private void atualizar() {
         medico.setNome(textfieldNomeDoMedico1.getText());
         medico.setCrm(textFieldCrm1.getText());
+        medico.setEmail(textfieldEmailDoMedico1.getText());
+        medico.setTelefone(textFieldTelefoneMedico.getText());
         
 
         if (validarCadastro()) {
