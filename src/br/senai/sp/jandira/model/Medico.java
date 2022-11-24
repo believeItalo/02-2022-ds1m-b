@@ -10,6 +10,7 @@ public class Medico extends Pessoa {
     private Especialidade especialidades;
     
     
+    
     public Medico(){
      
         atualizarCodigo();
@@ -17,14 +18,13 @@ public class Medico extends Pessoa {
     
       public Medico(Integer codigo, String crm , String nome, String email, String telefone){
               
-            this.codigo = contador;
+            this.codigo = codigo;
             this.crm = crm;
             setNome(nome);
             setEmail(email);
             setTelefone(telefone);
-            
-          
-            atualizarCodigo();
+            this.contador = codigo;
+           
         }
     
     public Medico(Integer codigo, String crm, String nome){

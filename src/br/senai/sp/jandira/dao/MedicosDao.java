@@ -146,9 +146,13 @@ public class MedicosDao {
                 String linhaVetor [] = linha.split(";");
                 //"split" retorna um vetor, sendo asssim a var tem que ser do tipo vetor
                 Medico novoMedico = new Medico(
-                        Integer.valueOf(linhaVetor[0]),
+                  Integer.valueOf(linhaVetor[0]),
+                        linhaVetor[1], 
                         linhaVetor[2], 
-                        linhaVetor[1]);
+                        linhaVetor[3], 
+                        linhaVetor[4]
+                        );
+                
                                       
                        
                 listaMedicos.add(novoMedico);

@@ -1,6 +1,8 @@
 package br.senai.sp.jandira.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.sound.sampled.DataLine;
 
 public class Pessoa {
 
@@ -8,6 +10,18 @@ public class Pessoa {
     private String email;
     private String telefone;
     private LocalDate dataDeNascimento;
+    
+   
+    
+    public String getDataDeNascimentcerta(){
+    
+        String[] separado =  dataDeNascimento.toString().split("-");
+        String dataCerta = separado[2] + "/" + separado[1] + "/" + separado[0];
+        return dataCerta;
+    
+    };
+    
+ 
 
     public void setNome(String nome) {
         this.nome = nome;

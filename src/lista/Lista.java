@@ -1,5 +1,5 @@
 
-package br.senai.sp.jandira.ui;
+package lista;
 
 public class Lista {
 

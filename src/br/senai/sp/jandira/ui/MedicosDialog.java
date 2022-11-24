@@ -5,12 +5,25 @@ import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import br.senai.sp.jandira.model.TipoOperacao;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import lista.FrameLista;
 
 public class MedicosDialog extends javax.swing.JDialog {
 
     private TipoOperacao tipoOperacao;
     private Medico medico;
+    private DefaultListModel<String> listaTodosModel = new DefaultListModel<>();
+    private ArrayList<String> cidades = new ArrayList<>();
+    
+    private DefaultListModel<String> selecionadosModel = new DefaultListModel<>();
+    private ArrayList<String> selecionados = new ArrayList<>();
+    
+   
 
     public MedicosDialog(
             java.awt.Frame parent,
@@ -19,11 +32,14 @@ public class MedicosDialog extends javax.swing.JDialog {
            Medico medico) {
 
         super(parent, modal);
+        
         initComponents();
+        carregarEspecialidades();
         this.tipoOperacao = tipoOperacao;
         this.medico = medico;
+       
         
-
+        
        //  Preencher os campos, caso o tipo de operação for ALTERAR
         if (tipoOperacao == TipoOperacao.ALTERAR) {
             preencherFormulario();
@@ -39,6 +55,7 @@ public class MedicosDialog extends javax.swing.JDialog {
        textFieldCodigoMedicos.setText(medico.getCodigo().toString());
        textfieldEmailDoMedico1.setText(medico.getEmail());
        textFieldTelefoneMedico.setText(medico.getTelefone());
+       
       
        
        
@@ -76,7 +93,12 @@ public class MedicosDialog extends javax.swing.JDialog {
         labelNomeDoMedico2 = new javax.swing.JLabel();
         labelEmailDoMedico1 = new javax.swing.JLabel();
         textfieldEmailDoMedico1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListTodos = new javax.swing.JList<>();
+        buttonTrocar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListSelecionados = new javax.swing.JList<>();
+        buttonTrocar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -141,7 +163,7 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(buttonCancelarMedico);
-        buttonCancelarMedico.setBounds(130, 250, 60, 60);
+        buttonCancelarMedico.setBounds(470, 390, 60, 60);
 
         buttonSalvarMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/save32.png"))); // NOI18N
         buttonSalvarMedico.setToolTipText("Salvar Cadastro");
@@ -151,7 +173,7 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(buttonSalvarMedico);
-        buttonSalvarMedico.setBounds(40, 250, 60, 60);
+        buttonSalvarMedico.setBounds(470, 300, 60, 60);
 
         textFieldCrm1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +181,7 @@ public class MedicosDialog extends javax.swing.JDialog {
             }
         });
         jPanel2.add(textFieldCrm1);
-        textFieldCrm1.setBounds(140, 70, 60, 30);
+        textFieldCrm1.setBounds(150, 70, 60, 30);
 
         labelDataDeNascimentoDoMedico.setText("Data De Nascimento:");
         jPanel2.add(labelDataDeNascimentoDoMedico);
@@ -189,14 +211,43 @@ public class MedicosDialog extends javax.swing.JDialog {
         jPanel2.add(textfieldEmailDoMedico1);
         textfieldEmailDoMedico1.setBounds(140, 150, 250, 30);
 
-        jButton3.setText("Abrir Lista de Especialidades");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jListTodos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jListTodos);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 210, 130, 270);
+
+        buttonTrocar.setText("trocar");
+        buttonTrocar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buttonTrocarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3);
-        jButton3.setBounds(220, 250, 190, 60);
+        jPanel2.add(buttonTrocar);
+        buttonTrocar.setBounds(170, 330, 110, 50);
+
+        jListSelecionados.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jListSelecionados);
+
+        jPanel2.add(jScrollPane2);
+        jScrollPane2.setBounds(300, 210, 140, 270);
+
+        buttonTrocar1.setText("Adicionar");
+        buttonTrocar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTrocar1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(buttonTrocar1);
+        buttonTrocar1.setBounds(170, 260, 110, 50);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(10, 60, 560, 500);
@@ -242,9 +293,23 @@ public class MedicosDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldCodigoMedicosActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void buttonTrocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTrocarActionPerformed
+        //String cidade = jListTodos.getSelectedValue(); Pega somente um, o primeiro
+        //Object[] cidades = jListTodos.getSelectedValues(); Depreciado
+        List<String> cidades = jListTodos.getSelectedValuesList(); // Usar esse aqui
+
+        for (String cidade : cidades){
+            selecionados.add(cidade);
+        }
+
+        selecionadosModel.clear();
+        selecionadosModel.addAll(selecionados);
+        jListSelecionados.setModel(selecionadosModel);
+    }//GEN-LAST:event_buttonTrocarActionPerformed
+
+    private void buttonTrocar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTrocar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonTrocar1ActionPerformed
 
 
    
@@ -256,9 +321,14 @@ public class MedicosDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelarMedico;
     private javax.swing.JButton buttonSalvarMedico;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton buttonTrocar;
+    private javax.swing.JButton buttonTrocar1;
+    private javax.swing.JList<String> jListSelecionados;
+    private javax.swing.JList<String> jListTodos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelCodigoMedicos;
     private javax.swing.JLabel labelCrmMedico;
     private javax.swing.JLabel labelDataDeNascimentoDoMedico;
@@ -319,20 +389,33 @@ public class MedicosDialog extends javax.swing.JDialog {
                     JOptionPane.INFORMATION_MESSAGE);
             dispose();
     }
-//        planoDeSaude.setOperadora(textNomeDaOperadora.getText());
-//        planoDeSaude.setTipoDoPlano(textTipoDoPlano.getText());
-//        
-//        if(validarCadastro()) {
-//            PlanoDeSaudeDAO.atualizar(planoDeSaude);
-//
-//            JOptionPane.showMessageDialog(
-//                    null,
-//                    "Plano de saúde atualizado com sucesso!",
-//                    "Plano de Saúde",
-//                    JOptionPane.INFORMATION_MESSAGE);
-//
-//            dispose();
-//        }
-    }}
+
+    }
+
+    private void carregarEspecialidades() {
+        cidades.add("100 - Cardiologista");
+        cidades.add("200 - Fisioterapeuta");
+        cidades.add("300 - Pediatra");
+        cidades.add("400 - Neurocirurgião");
+        cidades.add("500 - Clínico Geral");
+        
+        listaTodosModel.addAll(cidades);
+        jListTodos.setModel(listaTodosModel);
+    }
+    private void carregarEspecialidadesParaTroca(){
+    
+        cidades.add("100 - Cardiologista");
+        cidades.add("200 - Fisioterapeuta");
+        cidades.add("300 - Pediatra");
+        cidades.add("400 - Neurocirurgião");
+        cidades.add("500 - Clínico Geral");
+        
+        listaTodosModel.addAll(cidades);
+        jListTodos.setModel(listaTodosModel);
+    
+    
+}
+    
+}
 
 
