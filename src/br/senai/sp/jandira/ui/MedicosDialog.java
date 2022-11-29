@@ -414,19 +414,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         listaTodosModel.addAll(especialidades);
         jListTodos.setModel(listaTodosModel);
     }
-    private void carregarEspecialidadesParaTroca(){
-    
-        especialidades.add("100 - Cardiologista");
-        especialidades.add("200 - Fisioterapeuta");
-        especialidades.add("300 - Pediatra");
-        especialidades.add("400 - Neurocirurgião");
-        especialidades.add("500 - Clínico Geral");
-        
-        listaTodosModel.addAll(especialidades);
-        jListTodos.setModel(listaTodosModel);
-    
-    
-}
+  
     
 }
 
