@@ -18,12 +18,11 @@ public class MedicosDialog extends javax.swing.JDialog {
     private TipoOperacao tipoOperacao;
     private Medico medico;
     private DefaultListModel<String> listaTodosModel = new DefaultListModel<>();
-    private ArrayList<String> cidades = new ArrayList<>();
+    private ArrayList<String> especialidades = new ArrayList<>();
     
-    private DefaultListModel<String> selecionadosModel = new DefaultListModel<>();
-    private ArrayList<String> selecionados = new ArrayList<>();
+    private DefaultListModel<String> tabela2 = new DefaultListModel<>();
+    private ArrayList<String> tabela1 = new ArrayList<>();
     
-   
 
     public MedicosDialog(
             java.awt.Frame parent,
@@ -55,7 +54,8 @@ public class MedicosDialog extends javax.swing.JDialog {
        textFieldCodigoMedicos.setText(medico.getCodigo().toString());
        textfieldEmailDoMedico1.setText(medico.getEmail());
        textFieldTelefoneMedico.setText(medico.getTelefone());
-       
+       textfieldDataDeNascimentoDoMedico.setText(medico.getDataDeNascimento());
+  
       
        
        
@@ -98,7 +98,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         buttonTrocar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListSelecionados = new javax.swing.JList<>();
-        buttonTrocar1 = new javax.swing.JButton();
+        buttonTrocar2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -219,16 +219,17 @@ public class MedicosDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jListTodos);
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 210, 130, 270);
+        jScrollPane1.setBounds(40, 210, 130, 270);
 
-        buttonTrocar.setText("trocar");
+        buttonTrocar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        buttonTrocar.setText(">");
         buttonTrocar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonTrocarActionPerformed(evt);
             }
         });
         jPanel2.add(buttonTrocar);
-        buttonTrocar.setBounds(170, 330, 110, 50);
+        buttonTrocar.setBounds(190, 320, 70, 50);
 
         jListSelecionados.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -240,14 +241,15 @@ public class MedicosDialog extends javax.swing.JDialog {
         jPanel2.add(jScrollPane2);
         jScrollPane2.setBounds(300, 210, 140, 270);
 
-        buttonTrocar1.setText("Adicionar");
-        buttonTrocar1.addActionListener(new java.awt.event.ActionListener() {
+        buttonTrocar2.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        buttonTrocar2.setText("<");
+        buttonTrocar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTrocar1ActionPerformed(evt);
+                buttonTrocar2ActionPerformed(evt);
             }
         });
-        jPanel2.add(buttonTrocar1);
-        buttonTrocar1.setBounds(170, 260, 110, 50);
+        jPanel2.add(buttonTrocar2);
+        buttonTrocar2.setBounds(190, 250, 70, 50);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(10, 60, 560, 500);
@@ -256,7 +258,7 @@ public class MedicosDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void textfieldDataDeNascimentoDoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfieldDataDeNascimentoDoMedicoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_textfieldDataDeNascimentoDoMedicoActionPerformed
 
     private void buttonSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarMedicoActionPerformed
@@ -296,20 +298,29 @@ public class MedicosDialog extends javax.swing.JDialog {
     private void buttonTrocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTrocarActionPerformed
         //String cidade = jListTodos.getSelectedValue(); Pega somente um, o primeiro
         //Object[] cidades = jListTodos.getSelectedValues(); Depreciado
-        List<String> cidades = jListTodos.getSelectedValuesList(); // Usar esse aqui
+        List<String> especialidade = jListTodos.getSelectedValuesList(); // Usar esse aqui
 
-        for (String cidade : cidades){
-            selecionados.add(cidade);
+        for (String especialidades : especialidade){
+            tabela1.add(especialidades);
         }
-
-        selecionadosModel.clear();
-        selecionadosModel.addAll(selecionados);
-        jListSelecionados.setModel(selecionadosModel);
+   
+        tabela2.clear();
+        tabela2.addAll(tabela1);
+        jListSelecionados.setModel(tabela2);
+         
+        
+        
     }//GEN-LAST:event_buttonTrocarActionPerformed
 
-    private void buttonTrocar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTrocar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonTrocar1ActionPerformed
+    private void buttonTrocar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTrocar2ActionPerformed
+       List<String> especialidade = jListSelecionados.getSelectedValuesList();
+        for (String especialidades : especialidade){
+            tabela1.remove(especialidades);
+        }
+          tabela2.clear();
+        tabela2.addAll(tabela1);
+        jListSelecionados.setModel(tabela2);
+    }//GEN-LAST:event_buttonTrocar2ActionPerformed
 
 
    
@@ -322,7 +333,7 @@ public class MedicosDialog extends javax.swing.JDialog {
     private javax.swing.JButton buttonCancelarMedico;
     private javax.swing.JButton buttonSalvarMedico;
     private javax.swing.JButton buttonTrocar;
-    private javax.swing.JButton buttonTrocar1;
+    private javax.swing.JButton buttonTrocar2;
     private javax.swing.JList<String> jListSelecionados;
     private javax.swing.JList<String> jListTodos;
     private javax.swing.JPanel jPanel1;
@@ -351,6 +362,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         m.setCrm(textFieldCrm1.getText());
         m.setEmail(textfieldEmailDoMedico1.getText());
         m.setTelefone(textFieldTelefoneMedico.getText());
+        m.setDataDeNascimento(textfieldDataDeNascimentoDoMedico.getText());
         if(validarCadastro()){
         
             MedicosDao.gravar(m);
@@ -379,7 +391,7 @@ public class MedicosDialog extends javax.swing.JDialog {
         medico.setCrm(textFieldCrm1.getText());
         medico.setEmail(textfieldEmailDoMedico1.getText());
         medico.setTelefone(textFieldTelefoneMedico.getText());
-        
+        medico.setDataDeNascimento(textfieldDataDeNascimentoDoMedico.getText());
 
         if (validarCadastro()) {
             MedicosDao.atualizar(medico);
@@ -393,24 +405,24 @@ public class MedicosDialog extends javax.swing.JDialog {
     }
 
     private void carregarEspecialidades() {
-        cidades.add("100 - Cardiologista");
-        cidades.add("200 - Fisioterapeuta");
-        cidades.add("300 - Pediatra");
-        cidades.add("400 - Neurocirurgião");
-        cidades.add("500 - Clínico Geral");
+        especialidades.add("100 - Cardiologista");
+        especialidades.add("200 - Fisioterapeuta");
+        especialidades.add("300 - Pediatra");
+        especialidades.add("400 - Neurocirurgião");
+        especialidades.add("500 - Clínico Geral");
         
-        listaTodosModel.addAll(cidades);
+        listaTodosModel.addAll(especialidades);
         jListTodos.setModel(listaTodosModel);
     }
     private void carregarEspecialidadesParaTroca(){
     
-        cidades.add("100 - Cardiologista");
-        cidades.add("200 - Fisioterapeuta");
-        cidades.add("300 - Pediatra");
-        cidades.add("400 - Neurocirurgião");
-        cidades.add("500 - Clínico Geral");
+        especialidades.add("100 - Cardiologista");
+        especialidades.add("200 - Fisioterapeuta");
+        especialidades.add("300 - Pediatra");
+        especialidades.add("400 - Neurocirurgião");
+        especialidades.add("500 - Clínico Geral");
         
-        listaTodosModel.addAll(cidades);
+        listaTodosModel.addAll(especialidades);
         jListTodos.setModel(listaTodosModel);
     
     

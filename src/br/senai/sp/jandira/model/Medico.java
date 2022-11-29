@@ -1,6 +1,6 @@
 package br.senai.sp.jandira.model;
 
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Medico extends Pessoa {
@@ -9,23 +9,23 @@ public class Medico extends Pessoa {
     private String crm;
     private Especialidade especialidades;
     
-    
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     public Medico(){
      
         atualizarCodigo();
         }
     
-      public Medico(Integer codigo, String crm , String nome, String email, String telefone){
-              
-            this.codigo = codigo;
-            this.crm = crm;
-            setNome(nome);
-            setEmail(email);
-            setTelefone(telefone);
-            this.contador = codigo;
-           
-        }
+      public Medico(Integer codigo, String nome, String crm, String telefone, String email, String dataDeNascimento) {
+
+        this.codigo = codigo;
+        this.crm = crm;
+        setNome(nome);
+        setEmail(email);
+        setTelefone(telefone);
+        setDataDeNascimento(dataDeNascimento);
+         this.contador = codigo; 
+    }
     
     public Medico(Integer codigo, String crm, String nome){
         this.crm = crm;
@@ -63,7 +63,10 @@ public class Medico extends Pessoa {
      String MedicosStr = 
              this.codigo + ";"
              + this.getNome() + ";" +
-             this.getCrm() + ";" + this.getEmail()+";"+ this.getTelefone();
+             this.getCrm() + ";" + 
+             this.getEmail()+";"+ 
+             this.getTelefone() + ";" +
+             this.getDataDeNascimento();
        
         return MedicosStr;
 }}

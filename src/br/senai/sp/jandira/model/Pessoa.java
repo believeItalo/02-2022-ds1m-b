@@ -3,6 +3,11 @@ package br.senai.sp.jandira.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.sound.sampled.DataLine;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.sql.Date;
+import java.time.Month;
+import static java.time.temporal.TemporalQueries.localDate;
 
 public class Pessoa {
 
@@ -10,17 +15,19 @@ public class Pessoa {
     private String email;
     private String telefone;
     private LocalDate dataDeNascimento;
-    
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+ 
    
-    
-    public String getDataDeNascimentcerta(){
-    
-        String[] separado =  dataDeNascimento.toString().split("-");
-        String dataCerta = separado[2] + "/" + separado[1] + "/" + separado[0];
-        return dataCerta;
-    
-    };
-    
+  
+    public String getDataDeNascimento() {
+        return dataDeNascimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public void setDataDeNascimento(String dataDeNascimento) {
+        this.dataDeNascimento = LocalDate.parse(dataDeNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+              
+            
+    }
  
 
     public void setNome(String nome) {
@@ -51,8 +58,6 @@ public class Pessoa {
         return telefone;
     }
 
-    public LocalDate getDataDeNascimento() {
-        return dataDeNascimento;
-    }
+    
 
 }
